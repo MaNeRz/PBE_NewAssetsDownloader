@@ -76,12 +76,22 @@ namespace PBE_NewFileExtractor
             var differences = newAssetsFileLines.Except(assetsFileLines);
             foreach (var difference in differences)
             {
-                if (difference.Contains(".png") ||
-                    difference.Contains(".jpg") ||
-                    difference.Contains(".ogg") ||
-                    difference.Contains(".webm"))
+                switch (difference.Contains("2x") || 
+                        difference.Contains("4x") ||
+                        difference.Contains("tx") ||
+                        difference.Contains("_skin") ||
+                        difference.Contains("particles")||
+                        difference.Contains("glow"))
                 {
-                    _differencesList.Add(difference);
+                    case false:
+                        if (difference.Contains(".png") ||
+                            difference.Contains(".jpg") ||
+                            difference.Contains(".ogg") ||
+                            difference.Contains(".webm"))
+                        {
+                            _differencesList.Add(difference);
+                        }
+                        break;
                 }
             }
             return _differencesList.Count;
