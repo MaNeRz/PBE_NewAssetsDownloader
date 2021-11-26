@@ -1,2 +1,3 @@
-# PBE_NewAssetsDownloader
-A Software that downloads the new League of Legends assets from PBE.
+# **PBE_NewAssetsDownloader**
+#What it is?
+This software allows to download the most recent assets from PBE.
