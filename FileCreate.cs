@@ -26,14 +26,13 @@ namespace PBE_NewFileExtractor
 
         private async Task DownloadAssetsAsync(string file)
         {
-
-            var response = await _request.RequestCDragonFilesExportedAsync();
             const string path = @".\Resources\";
             try
             {
                 if (Path.Combine(path, file) == @".\Resources\Assets.txt" &&
                     !File.Exists(Path.Combine(path, file)))
                 {
+                    var response = await _request.RequestCDragonFilesExportedLatestAsync();
                     Log.Warning("File not found: {0}", Path.GetFullPath(Path.Combine(path, file)));
                     await Task.Delay(3000);
                     await File.WriteAllTextAsync(Path.Combine(path, file), response);
@@ -42,6 +41,7 @@ namespace PBE_NewFileExtractor
                 }
                 if (Path.Combine(path, file) == @".\Resources\NewAssets.txt")
                 {
+                    var response = await _request.RequestCDragonFilesExportedPbeAsync();
                     switch (File.Exists(Path.Combine(path, file)))
                     {
                         case false:
