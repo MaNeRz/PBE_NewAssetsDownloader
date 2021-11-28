@@ -1,3 +1,5 @@
 # **PBE_NewAssetsDownloader**
 # What it is?
-This software allows to download the most recent assets from PBE.
+A software that allows to download the most recent assets from Public Beta Environment servers
+# Tasks
+- [ ] Check if raw.communitydragon.org is online before starting all the process
