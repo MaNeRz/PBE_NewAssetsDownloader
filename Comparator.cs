@@ -37,7 +37,6 @@ namespace PBE_NewFileExtractor
 
             try
             {
-                await File.WriteAllLinesAsync(DifferencesFilePath, _differencesList);
                 switch (File.Exists(DifferencesFilePath))
                 {
                     case false:
@@ -47,6 +46,7 @@ namespace PBE_NewFileExtractor
                         Log.Information("File updated: {0}", Path.GetFullPath(DifferencesFilePath));
                         break;
                 }
+                await File.WriteAllLinesAsync(DifferencesFilePath, _differencesList);
                 await Task.Delay(3000);
             }
             catch (Exception e)
