@@ -7,6 +7,7 @@ namespace PBE_NewFileExtractor
     {
         private const string CDragonExportedUrlPbe = "https://raw.communitydragon.org/pbe/cdragon/files.exported.txt";
         private const string CDragonExportedUrlLatest = "https://raw.communitydragon.org/latest/cdragon/files.exported.txt";
+        private const string CDragonRaw = "https://raw.communitydragon.org";
         private readonly HttpClient _httpClient;
 
         public RequestsMaker()
@@ -22,6 +23,11 @@ namespace PBE_NewFileExtractor
         public Task<string> RequestCDragonFilesExportedLatestAsync()
         {
             return _httpClient.GetStringAsync(CDragonExportedUrlLatest);
+        }
+
+        public Task<HttpResponseMessage> RequestCDragonRaw()
+        {
+            return _httpClient.GetAsync(CDragonRaw);
         }
     }
 }
