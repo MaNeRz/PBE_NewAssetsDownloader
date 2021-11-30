@@ -22,7 +22,6 @@ namespace PBE_NewFileExtractor
         {
             try
             {
-                Log.Logger = LogSettings.CreateLogger();
                 Log.Information("Checking for differences between {0} and {1} ", AssetsFilePath.Split('\\').Last(), NewAssetsFilePath.Split('\\').Last());
                 await Task.Delay(3000);
                 DifferenceList();
@@ -58,6 +57,7 @@ namespace PBE_NewFileExtractor
 
         public void ReplaceAssetsFile()
         {
+            Log.Logger = LogSettings.CreateLogger();
             try
             {
                 File.Replace(NewAssetsFilePath, AssetsFilePath, null);

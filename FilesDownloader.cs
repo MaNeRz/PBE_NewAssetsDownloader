@@ -36,13 +36,13 @@ namespace PBE_NewFileExtractor
                         !Path.GetExtension(url).Contains(".jpg") &&
                         !Path.GetExtension(url).Contains(".ogg") &&
                         !Path.GetExtension(url).Contains(".webm")) continue;
-                    var response = await client.GetByteArrayAsync(url);
                     if (clientResponse.IsSuccessStatusCode == false)
                     {
                         Log.Error("Asset not downloaded: {0}", assetExtractedName);
                     }
                     else
                     {
+                        var response = await client.GetByteArrayAsync(url);
                         while (File.Exists(Path.Combine(dirAssetsDownloadedPath, assetExtractedName)))
                         {
                             counter++;

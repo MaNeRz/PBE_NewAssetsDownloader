@@ -20,7 +20,6 @@ namespace PBE_NewFileExtractor
 
         private async Task CreateFoldersAsync(string path)
         {
-            Log.Logger = LogSettings.CreateLogger();
             try
             {
                 if (!Directory.Exists(path))
