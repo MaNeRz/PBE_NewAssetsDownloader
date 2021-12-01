@@ -25,10 +25,10 @@ namespace PBE_NewFileExtractor
                 if (!Directory.Exists(path))
                 {
                     Log.Warning("Directory not found: {0}", Path.GetFullPath(path));
-                    await Task.Delay(3000);
+                    await Task.Delay(1000);
                     Directory.CreateDirectory(path);
                     Log.Information("Directory created: {0}", Path.GetFullPath(path));
-                    await Task.Delay(3000);
+                    await Task.Delay(1000);
                 }
             }
             catch (Exception e)
