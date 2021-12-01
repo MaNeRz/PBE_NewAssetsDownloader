@@ -23,7 +23,7 @@ namespace PBE_NewFileExtractor
             try
             {
                 Log.Information("Ready to download {0} assets", filesComparator.DifferenceList());
-                await Task.Delay(3000);
+                await Task.Delay(1000);
                 foreach (var line in differencesFileReader) urlList.Add(line);
 
                 foreach (var url in urlList)
