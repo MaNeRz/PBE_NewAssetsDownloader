@@ -34,10 +34,10 @@ namespace PBE_NewFileExtractor
                 {
                     var response = await _request.RequestCDragonFilesExportedLatestAsync();
                     Log.Warning("File not found: {0}", Path.GetFullPath(Path.Combine(path, file)));
-                    await Task.Delay(3000);
+                    await Task.Delay(1000);
                     await File.WriteAllTextAsync(Path.Combine(path, file), response);
                     Log.Information("File created: {0}", Path.GetFullPath(Path.Combine(path, file)));
-                    await Task.Delay(3000);
+                    await Task.Delay(1000);
                 }
                 if (Path.Combine(path, file) == @".\Resources\NewAssets.txt")
                 {
@@ -46,7 +46,7 @@ namespace PBE_NewFileExtractor
                     {
                         case false:
                             Log.Warning("File not found: {0}", Path.GetFullPath(Path.Combine(path, file)));
-                            await Task.Delay(3000);
+                            await Task.Delay(1000);
                             Log.Information("File created: {0}", Path.GetFullPath(Path.Combine(path, file)));
                             break;
                         case true:
@@ -54,7 +54,7 @@ namespace PBE_NewFileExtractor
                             break;
                     }
                     await File.WriteAllTextAsync(Path.Combine(path, file), response);
-                    await Task.Delay(3000);
+                    await Task.Delay(1000);
                 }
             }
             catch (Exception e)
