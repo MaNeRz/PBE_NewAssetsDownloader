@@ -23,10 +23,10 @@ namespace PBE_NewFileExtractor
             try
             {
                 Log.Information("Checking for differences between {0} and {1} ", AssetsFilePath.Split('\\').Last(), NewAssetsFilePath.Split('\\').Last());
-                await Task.Delay(3000);
+                await Task.Delay(1000);
                 DifferenceList();
                 Log.Information("Found {0} differences", _differencesList.Count);
-                await Task.Delay(3000);
+                await Task.Delay(1000);
             }
             catch (Exception e)
             {
@@ -46,7 +46,7 @@ namespace PBE_NewFileExtractor
                         break;
                 }
                 await File.WriteAllLinesAsync(DifferencesFilePath, _differencesList);
-                await Task.Delay(3000);
+                await Task.Delay(1000);
             }
             catch (Exception e)
             {
@@ -87,7 +87,8 @@ namespace PBE_NewFileExtractor
                         if (difference.Contains(".png") ||
                             difference.Contains(".jpg") ||
                             difference.Contains(".ogg") ||
-                            difference.Contains(".webm"))
+                            difference.Contains(".webm") ||
+                            difference.Contains(".svg"))
                         {
                             _differencesList.Add(difference);
                         }
