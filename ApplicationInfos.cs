@@ -6,7 +6,7 @@ namespace PBE_NewFileExtractor
     {
         public static void Infos()
         {
-            const string version = "Beta 1.2";
+            const string version = "1.0";
             Console.Title = $"League Of Legends - PBE New Assets Extractor | v.{version}";
         }
     }
