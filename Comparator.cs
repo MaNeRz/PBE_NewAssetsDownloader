@@ -60,6 +60,7 @@ namespace PBE_NewFileExtractor
             Log.Logger = LogSettings.CreateLogger();
             try
             {
+                Log.Information("Replaced {0} with {1} and deleted {0}", Path.GetFileName(NewAssetsFilePath), Path.GetFileName(AssetsFilePath));
                 File.Replace(NewAssetsFilePath, AssetsFilePath, null);
             }
             catch (Exception e)
