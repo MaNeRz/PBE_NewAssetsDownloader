@@ -14,21 +14,23 @@ namespace PBE_NewFileExtractor
         {
             using var client = new HttpClient {BaseAddress = new Uri("https://raw.communitydragon.org/pbe/")};
             const string differencesFilePath = @".\Resources\Differences.txt";
-            const string dirAssetsDownloadedPath = @".\AssetsDownloaded\";
             var differencesFileReader = await File.ReadAllLinesAsync(differencesFilePath);
             var filesComparator = new FilesComparator();
+            var directoryCreator = new DirectoriesCreator();
             var urlList = new List<string>();
+            var differencesListCounter = filesComparator.DifferenceList();
             var counter = 0;
 
             try
             {
-                switch (filesComparator.DifferenceList())
+                switch (differencesListCounter)
                 {
                     case 0:
                         Log.Information("No assets to download");
                         break;
                     case >0:
-                        Log.Information("Ready to download {0} assets", filesComparator.DifferenceList());
+                        await directoryCreator.CreateSubAssetsDownloadedFolderAsync();
+                        Log.Information("Ready to download {0} assets", differencesListCounter);
                         break;
                 }
                 await Task.Delay(1000);
@@ -51,12 +53,12 @@ namespace PBE_NewFileExtractor
                     else
                     {
                         var response = await client.GetByteArrayAsync(url);
-                        while (File.Exists(Path.Combine(dirAssetsDownloadedPath, assetExtractedName)))
+                        while (File.Exists(Path.Combine(directoryCreator.DirSubAssetsDownloadedPath, assetExtractedName)))
                         {
                             counter++;
                             assetExtractedName = $"{url.Split('/').Last().Split('.').First()}({counter}).{url.Split('/').Last().Split('.').Last()}";
                         }
-                        await File.WriteAllBytesAsync(Path.Combine(dirAssetsDownloadedPath, assetExtractedName), response);
+                        await File.WriteAllBytesAsync(Path.Combine(directoryCreator.DirSubAssetsDownloadedPath, assetExtractedName), response);
                         counter = 0;
                         Log.Information("Asset downloaded: {0}", assetExtractedName);
                     }
