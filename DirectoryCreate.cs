@@ -8,17 +8,19 @@ namespace PBE_NewFileExtractor
 {
     public class DirectoriesCreator
     {
-        public Task CreateDirResourcesAsync()
+        private const string DirAssetsDownloadedPath = @".\AssetsDownloaded\";
+        public readonly string DirSubAssetsDownloadedPath = Path.Combine(DirAssetsDownloadedPath, DateTime.Now.ToString("dd-M-yyyy--HH-mm"));
+        public static Task CreateDirResourcesAsync()
         {
             return CreateFoldersAsync(@".\Resources\");
         }
 
-        public Task CreateDirAssetsDownloadedAsync()
+        public static Task CreateDirAssetsDownloadedAsync()
         {
             return CreateFoldersAsync(@".\AssetsDownloaded\");
         }
 
-        private async Task CreateFoldersAsync(string path)
+        private static async Task CreateFoldersAsync(string path)
         {
             try
             {
@@ -37,5 +39,21 @@ namespace PBE_NewFileExtractor
                 Console.ReadKey();
             }
         }
+
+        public async Task CreateSubAssetsDownloadedFolderAsync()
+        {
+            try
+            {
+                Directory.CreateDirectory(Path.Combine(DirAssetsDownloadedPath, DateTime.Now.ToString("dd-M-yyyy--HH-mm")));
+                Log.Information("Directory created: {0}", Path.GetFullPath(DirSubAssetsDownloadedPath));
+                await Task.Delay(1000);
+            }
+            catch (Exception e)
+            {
+                Log.Error("Error during directory {1} creation!\nError:\n{0}", e, DirSubAssetsDownloadedPath.TrimStart('\\').TrimEnd('\\'));
+                Console.ReadKey();
+            }
+        }
+        
     }
 }
