@@ -1,21 +1,24 @@
-name: Release-Notes-Preview
+---
+name: "pre-release"
 
 on:
-  pull_request:
-    branches: [ master ]
-  issue_comment:
-    types: [ edited ]
+  push:
+    branches:
+      - "master"
 
 jobs:
-  preview:
-    runs-on: ubuntu-latest
+  pre-release:
+    name: "Pre Release"
+    runs-on: "ubuntu-latest"
+
     steps:
-    - uses: actions/checkout@v2
-    - run: |
-        git fetch --prune --unshallow --tags
-    - uses: snyk/release-notes-preview@v1.6.1
-      with:
-        releaseBranch: master
-      env:
-        GITHUB_PR_USERNAME: ${{ github.actor }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Build & test"
+        run: |
+          echo "done!"
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: false
+          prerelease: true
+          title: "Development Build"
