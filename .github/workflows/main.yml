@@ -28,7 +28,6 @@ jobs:
       - uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
           repo_token: "${{ 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 }}"
-          automatic_release_tag: latest
           draft: false
           prerelease: false
           title: PBE_NewAssetsDownloader
