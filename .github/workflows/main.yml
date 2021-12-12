@@ -4,19 +4,19 @@ on:
   workflow_dispatch:
     inputs:
         appVersion:
-          description: 'Some good test'
+          description: "Some good test"
           required: true
-          default: '1.X.X.X'
+          default: "1.X.X.X"
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-      - name: GIT Release
-        uses: marvinpinto/action-automatic-releases@latest
+      - name: "GIT Release"
+        uses: "marvinpinto/action-automatic-releases@latest"
         with:
           title: "Test v${{ github.event.inputs.appVersion }}"
-          automatic_release_tag: ${{ github.event.inputs.appVersion }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: "${{ github.event.inputs.appVersion }}"
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
