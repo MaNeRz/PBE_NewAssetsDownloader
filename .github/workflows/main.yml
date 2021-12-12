@@ -1,24 +1,22 @@
----
-name: "pre-release"
+name: FModel Builder
 
 on:
-  push:
-    branches:
-      - "master"
+  workflow_dispatch:
+    inputs:
+        appVersion:
+          description: 'Some good test'
+          required: true
+          default: '1.X.X.X'
 
 jobs:
-  pre-release:
-    name: "Pre Release"
-    runs-on: "ubuntu-latest"
+  build:
+    runs-on: windows-latest
 
     steps:
-      - name: "Build & test"
-        run: |
-          echo "done!"
-
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - name: GIT Release
+        uses: marvinpinto/action-automatic-releases@latest
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: false
-          prerelease: true
-          title: "Development Build"
+          title: "Test v${{ github.event.inputs.appVersion }}"
+          automatic_release_tag: ${{ github.event.inputs.appVersion }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false
