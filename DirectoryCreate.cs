@@ -10,12 +10,12 @@ namespace PBE_NewFileExtractor
     {
         private const string DirAssetsDownloadedPath = @".\AssetsDownloaded\";
         public readonly string DirSubAssetsDownloadedPath = Path.Combine(DirAssetsDownloadedPath, DateTime.Now.ToString("dd-M-yyyy--HH-mm"));
-        public static Task CreateDirResourcesAsync()
+        public Task CreateDirResourcesAsync()
         {
             return CreateFoldersAsync(@".\Resources\");
         }
 
-        public static Task CreateDirAssetsDownloadedAsync()
+        public Task CreateDirAssetsDownloadedAsync()
         {
             return CreateFoldersAsync(@".\AssetsDownloaded\");
         }
