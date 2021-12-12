@@ -5,7 +5,7 @@ using Serilog.Sinks.SystemConsole.Themes;
 
 namespace PBE_NewFileExtractor
 {
-    public class LogSettings
+    public static class LogSettings
     {
         public static Logger CreateLogger()
         {
