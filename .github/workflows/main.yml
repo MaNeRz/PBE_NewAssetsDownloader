@@ -3,7 +3,7 @@ name: "tagged-release"
 on:
   push:
     tags:
-      - "v*"
+      - "1.1.0.0"
 
 jobs:
   release:
