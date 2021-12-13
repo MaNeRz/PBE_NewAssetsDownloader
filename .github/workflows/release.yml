@@ -5,7 +5,7 @@ name: Release
 on:
   push:
     tags:
-      - "1.*"
+      - "v*"
 
 # Automatically create a GitHub Release, with release details specified (the relevant commits)
 jobs:
