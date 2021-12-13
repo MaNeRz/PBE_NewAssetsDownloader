@@ -1,21 +1,29 @@
-name: Release
+name: Release Drafter
+
 on:
   push:
+    # branches to consider in the event; optional, defaults to all
     branches:
       - master
+  # pull_request event is required only for autolabeler
+  pull_request:
+    # Only following types are handled by the action, but one can default to all as well
+    types: [opened, reopened, synchronize]
 
 jobs:
-  build:
-    name: Release
+  update_release_draft:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Release
-        uses: justincy/github-action-npm-release@2.0.2
-        id: release
-      - name: Print release output
-        if: ${{ steps.release.outputs.released == 'true' }}
-        run: echo Release ID ${{ steps.release.outputs.release_id }}
+      # (Optional) GitHub Enterprise requires GHE_HOST variable set
+      #- name: Set GHE_HOST
+      #  run: |
+      #    echo "GHE_HOST=${GITHUB_SERVER_URL##https:\/\/}" >> $GITHUB_ENV
+
+      # Drafts your next Release notes as Pull Requests are merged into "master"
+      - uses: release-drafter/release-drafter@v5
+        # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
+        # with:
+        #   config-name: my-config.yml
+        #   disable-autolabeler: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
