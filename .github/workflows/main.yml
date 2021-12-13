@@ -1,12 +1,12 @@
-name: "pre-release"
+name: "tagged-release"
 
 on:
   push:
-    branches:
-      - "master"
+    tags:
+      - "v*"
 
 jobs:
-  release:
+  tagged-release:
     name: "Release"
     runs-on: "windows-latest"
 
@@ -20,4 +20,3 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          title: "Test build"
